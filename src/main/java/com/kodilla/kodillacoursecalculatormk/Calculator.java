@@ -9,6 +9,7 @@ public class Calculator {
     private double value1 = 0;
     private double value2 = 0;
     private double result = 0;
+    private Operators operator = new Operators();
 
     public double calculate(String sequence) {
 
@@ -29,25 +30,7 @@ public class Calculator {
                     value1 = sequenceItems.pop();
                     value2 = sequenceItems.pop();
 
-                    if ( sequenceItem.equals("+")) {
-                        AddValues operation = new AddValues();
-                        result = operation.operation(value2, value1);
-                    }
-
-                    if ( sequenceItem.equals("-")) {
-                        SubtractValues operation = new SubtractValues();
-                        result = operation.operation(value2, value1);
-                    }
-
-                    if ( sequenceItem.equals("/")) {
-                        DivideValues operation = new DivideValues();
-                        result = operation.operation(value2, value1);
-                    }
-
-                    if ( sequenceItem.equals("*")) {
-                        MultiplyValues operation = new MultiplyValues();
-                        result = operation.operation(value2, value1);
-                    }
+                    result = operator.getOperators(value2,value1,sequenceItem);
 
                     sequenceItems.push(result);
                     sequenceItem = "";
