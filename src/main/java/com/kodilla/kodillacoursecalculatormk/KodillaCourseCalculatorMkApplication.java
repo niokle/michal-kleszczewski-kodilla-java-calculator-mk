@@ -13,7 +13,5 @@ public class KodillaCourseCalculatorMkApplication {
 
         Calculator calc = new Calculator();
         System.out.println(calc.calculate("12 2 3 4 * 10 5 / + * +"));
-
     }
-
 }

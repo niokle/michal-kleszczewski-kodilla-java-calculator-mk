@@ -1,6 +1,8 @@
 package com.kodilla.kodillacoursecalculatormk;
 
 import java.util.ArrayDeque;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Calculator {
     private String sequence = "";
@@ -9,9 +11,13 @@ public class Calculator {
     private double value1 = 0;
     private double value2 = 0;
     private double result = 0;
-    private Operators operator = new Operators();
+    private List<CalculatorInterface> functions = new ArrayList();
 
     public double calculate(String sequence) {
+        functions.add(new AddValues());
+        functions.add(new SubtractValues());
+        functions.add(new MultiplyValues());
+        functions.add(new DivideValues());
 
         if ( sequence.substring(sequence.length() - 1, sequence.length()).trim().isEmpty() == false) {
             sequence += " ";
@@ -30,7 +36,11 @@ public class Calculator {
                     value1 = sequenceItems.pop();
                     value2 = sequenceItems.pop();
 
-                    result = operator.getOperators(value2,value1,sequenceItem);
+                    for (CalculatorInterface function : functions) {
+                        if (function.getOperator().equals(sequenceItem)) {
+                            result = function.operation(value2, value1);
+                        }
+                    }
 
                     sequenceItems.push(result);
                     sequenceItem = "";
